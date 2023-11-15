@@ -1,36 +1,59 @@
 <%- include('partials/header'); -%>
 
+<!-- Add a search input -->
+<input type="text" id="searchInput" placeholder="Search by name or ingredients">
+
 <ul class="recipes">
-  <li class="recipe">
-    <img src="/smoothie.png" alt="smoothie recipe icon">
-    <h4>Banana Boost</h4>
-    <p>Banana, Vanilla ice cream, Milk</p>
-  </li>
-  <li class="recipe">
-    <img src="/smoothie.png" alt="smoothie recipe icon">
-    <h4>Tropical Twist</h4>
-    <p>Peach, Pinapple, Apple juice</p>
-  </li>
-  <li class="recipe">
-    <img src="/smoothie.png" alt="smoothie recipe icon">
-    <h4>Protein Packer</h4>
-    <p>Oats, Peanut butter, Milk, Banana, Blueberries</p>
-  </li>
-  <li class="recipe">
-    <img src="/smoothie.png" alt="smoothie recipe icon">
-    <h4>Banana Boost</h4>
-    <p>Banana, Vanilla ice cream, Milk</p>
-  </li>
-  <li class="recipe">
-    <img src="/smoothie.png" alt="smoothie recipe icon">
-    <h4>Tropical Twist</h4>
-    <p>Peach, Pinapple, Apple juice</p>
-  </li>
-  <li class="recipe">
-    <img src="/smoothie.png" alt="smoothie recipe icon">
-    <h4>Protein Packer</h4>
-    <p>Oats, Peanut butter, Milk, Banana, Blueberries</p>
-  </li>
+  <% const smoothies = [
+    { Name: "Tropical Bliss", Ingredients: "Mango, Pineapple, Banana, Coconut Milk, Greek Yogurt, Honey", Instructions: "Blend all ingredients until smooth. Enjoy!" },
+    { Name: "Berry Burst", Ingredients: "Strawberries, Blueberries, Raspberry, Spinach, Almond Milk, Chia Seeds", Instructions: "Blend berries, spinach, almond milk, and chia seeds until well mixed. Serve chilled." },
+    { Name: "Green Goddess", Ingredients: "Kale, Banana, Green Apple, Cucumber, Lemon Juice, Water", Instructions: "Blend kale, banana, green apple, cucumber, and lemon juice with water until creamy. Refreshing and nutritious!" },
+    { Name: "Protein Powerhouse", Ingredients: "Spinach, Banana, Greek Yogurt, Protein Powder, Almond Milk", Instructions: "Blend spinach, banana, Greek yogurt, protein powder, and almond milk until desired consistency. A protein-packed smoothie for a boost!" },
+    { Name: "Citrus Splash", Ingredients: "Orange, Pineapple, Mango, Carrot, Coconut Water", Instructions: "Blend orange, pineapple, mango, carrot, and coconut water for a refreshing citrus kick. Perfect for a sunny day!" },
+    { Name: "Very Berry Delight", Ingredients: "Blueberries, Strawberries, Blackberries, Vanilla Yogurt, Almond Milk", Instructions: "Blend mixed berries, vanilla yogurt, and almond milk for a delightful berry treat." },
+    { Name: "Minty Fresh", Ingredients: "Spinach, Banana, Mint Leaves, Green Tea, Honey, Ice Cubes", Instructions: "Blend spinach, banana, mint leaves, green tea, honey, and ice cubes until smooth. A refreshing and energizing smoothie!" },
+    { Name: "Peach Paradise", Ingredients: "Peaches, Mango, Orange Juice, Vanilla Yogurt, Ice", Instructions: "Blend peaches, mango, orange juice, vanilla yogurt, and ice for a taste of paradise." },
+    { Name: "Chocolate Banana Bliss", Ingredients: "Banana, Cocoa Powder, Peanut Butter, Greek Yogurt, Almond Milk", Instructions: "Blend banana, cocoa powder, peanut butter, Greek yogurt, and almond milk for a chocolatey indulgence." },
+    { Name: "Coconut Berry Breeze", Ingredients: "Coconut Water, Strawberries, Blueberries, Pineapple, Greek Yogurt", Instructions: "Blend coconut water, strawberries, blueberries, pineapple, and Greek yogurt for a tropical and hydrating smoothie." },
+    { Name: "Spinach Pineapple Power", Ingredients: "Spinach, Pineapple, Banana, Orange Juice, Chia Seeds", Instructions: "Blend spinach, pineapple, banana, orange juice, and chia seeds for a nutrient-packed green smoothie." },
+    { Name: "Vanilla Almond Dream", Ingredients: "Almond Milk, Banana, Vanilla Extract, Almond Butter, Ice", Instructions: "Blend almond milk, banana, vanilla extract, almond butter, and ice for a creamy and nutty delight." },
+    { Name: "Mango Tango", Ingredients: "Mango, Pineapple, Orange, Lime Juice, Coconut Milk", Instructions: "Blend mango, pineapple, orange, lime juice, and coconut milk for a tropical dance of flavors." },
+    { Name: "Blueberry Avocado Bliss", Ingredients: "Blueberries, Avocado, Greek Yogurt, Honey, Almond Milk", Instructions: "Blend blueberries, avocado, Greek yogurt, honey, and almond milk for a creamy and antioxidant-rich smoothie." },
+    { Name: "Raspberry Lemonade Cooler", Ingredients: "Raspberries, Lemonade, Mint Leaves, Ice", Instructions: "Blend raspberries, lemonade, mint leaves, and ice for a refreshing and tangy cooler." },
+  ]; %>
+
+  <!-- Iterate over smoothies data -->
+  <% smoothies.forEach(function(smoothie) { %>
+    <li class="recipe">
+      <img src="/smoothie.png" alt="smoothie recipe icon">
+      <h4><%= smoothie.Name %></h4>
+      <p><%= smoothie.Ingredients %></p>
+      <p><%= smoothie.Instructions %></p>
+    </li>
+  <% }); %>
 </ul>
 
+
 <%- include('partials/footer'); -%>
+
+<script>
+  // Add JavaScript for filtering smoothies based on user input
+  const searchInput = document.getElementById('searchInput');
+  const recipes = document.querySelectorAll('.recipe');
+
+  searchInput.addEventListener('input', function() {
+    const searchTerm = searchInput.value.toLowerCase();
+
+    recipes.forEach(function(recipe) {
+      const recipeName = recipe.querySelector('h4').innerText.toLowerCase();
+      const recipeIngredients = recipe.querySelector('p').innerText.toLowerCase();
+
+      // Show or hide recipes based on search term
+      if (recipeName.includes(searchTerm) || recipeIngredients.includes(searchTerm)) {
+        recipe.style.display = 'block';
+      } else {
+        recipe.style.display = 'none';
+      }
+    });
+  });
+</script>
