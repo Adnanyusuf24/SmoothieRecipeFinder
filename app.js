@@ -16,10 +16,17 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 
 // database connection
-const dbURI = 'mongodb+srv://Mule:Test1234@cluster0.xnqqeoh.mongodb.net/';
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true })
-  .then((result) => app.listen(3000))
-  .catch((err) => console.log(err));
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    // Conditionally start server based on environment
+    if (process.env.NODE_ENV !== 'production') {
+        const PORT = process.env.PORT || 3000; // Use PORT environment variable
+        app.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`);
+        });
+    }
+  })
+  .catch((err) => console.log('Database connection error:', err));
 
 // routes
 app.get('*', checkUser);
