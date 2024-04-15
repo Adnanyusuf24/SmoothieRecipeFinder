@@ -2,19 +2,19 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const authRoutes = require('../routes/authRoutes'); // Adjust the path if necessary
-const { requireAuth, checkUser } = require('../middleware/authMiddleware'); // Adjust the path if necessary
+const authRoutes = require('../routes/authRoutes'); // Go up one directory level
+const { requireAuth, checkUser } = require('../middleware/authMiddleware'); // Go up one directory level
 
 const app = express();
 
 // Middleware
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '..', 'public'))); // Adjust path for static files
 app.use(express.json());
 app.use(cookieParser());
 
 // View engine
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views')); // Ensure views are correctly located
+app.set('views', path.join(__dirname, '..', 'views')); // Adjust path for views
 
 // Database connection
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
