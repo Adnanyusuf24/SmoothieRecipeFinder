@@ -1,9 +1,9 @@
 //const dbURI = 'mongodb+srv://RecipeFinder:Test1234cluster0.yl9aluj.mongodb.net/?retryWrites=true&w=majority';
 const express = require('express');
 const mongoose = require('mongoose');
-const authRoutes = require('./routes/authRoutes');
+const authRoutes = require('../routes/authRoutes');
 const cookieParser = require('cookie-parser');
-const { requireAuth, checkUser } = require('./middleware/authMiddleware');
+const { requireAuth, checkUser } = require('../middleware/authMiddleware');
 
 const app = express();
 
