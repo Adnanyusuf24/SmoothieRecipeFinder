@@ -2,11 +2,7 @@
     "version": 2,
     "routes": [
       {
-        "src": "/Ecommerce(.*)",
-        "dest": "/app.js"
-      },
-      {
-        "src": "/SmoothieRecipeFinder(.*)",
+        "src": "/",
         "dest": "/app.js"
       },
       {
