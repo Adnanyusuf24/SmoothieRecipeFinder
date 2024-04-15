@@ -20,10 +20,13 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
   .then(() => {
     // Conditionally start server based on environment
     if (process.env.NODE_ENV !== 'production') {
-        const PORT = process.env.PORT || 3000; // Use PORT environment variable
-        app.listen(PORT, () => {
-            console.log(`Server is running on port ${PORT}`);
-        });
+      const PORT = process.env.PORT || 3000;
+      app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+      });
+    } else {
+      // For Vercel, just export the app
+      module.exports = app;
     }
   })
   .catch((err) => console.log('Database connection error:', err));
