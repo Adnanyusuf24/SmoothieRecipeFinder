@@ -2,8 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const authRoutes = require('./routes/authRoutes'); // Adjust the path if necessary
-const { requireAuth, checkUser } = require('./middleware/authMiddleware'); // Adjust the path if necessary
+const authRoutes = require('../routes/authRoutes'); // Adjust the path if necessary
+const { requireAuth, checkUser } = require('../middleware/authMiddleware'); // Adjust the path if necessary
 
 const app = express();
 
